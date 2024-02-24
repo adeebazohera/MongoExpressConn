@@ -14,6 +14,15 @@ app.post('/sendMsg',async(req,res)=>{
     await collection.insertMany([{msg}])
     res.send("sent")
 })
+app.get('/all', async (req, res) => {
+    try {
+    const allCol = await collection.find();
+    res.json(allCol);
+    } catch (error) {
+    console.error('Error retrieving users:', error.message);
+    res.status(500).send('Error retrieving users');
+    }
+});
 app.listen(3000,()=>{
     console.log("port connected")
 })
